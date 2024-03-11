@@ -1,0 +1,27 @@
+{
+  "name": "twitter-clone-api-c1-hervekongo96",
+  "version": "1.0.0",
+  "description": "\"api the clone tweeter\"",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadea-academy-learners/twitter-clone-api-c1-hervekongo96.git"
+  },
+  "keywords": [
+    "{tweeter-api",
+    "clone-tweeter}"
+  ],
+  "author": "hervé kongo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadea-academy-learners/twitter-clone-api-c1-hervekongo96/issues"
+  },
+  "homepage": "https://github.com/kadea-academy-learners/twitter-clone-api-c1-hervekongo96#readme",
+  "dependencies": {
+    "express": "^4.18.3"
+  }
+}
