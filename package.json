@@ -23,6 +23,7 @@
   "homepage": "https://github.com/kadea-academy-learners/twitter-clone-api-c1-hervekongo96#readme",
   "dependencies": {
     "express": "^4.18.3",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "uuid": "^9.0.1"
   }
 }
