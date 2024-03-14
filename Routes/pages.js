@@ -5,25 +5,14 @@ const path = require('path');
 const data = require("../assets/data.json");
 
 
-router.get('/', (req, res)=>{
-    res.send(data);
-});
-
-router.get('/all-tweets', (req, res) =>{
-    const tweets = data.tweets;
-    const reversedata = tweets.slice().reverse(); 
-    res.json(reversedata);
-})
 
 router.get('/tweets', (req, res) => {
 
     const initialDataPath = path.join(__dirname, '../assets/initial-data.json');
     const dataPath = path.join(__dirname, '../assets/data.json');
 
-    // Vérifier si le fichier data.json existe
     fs.access(dataPath, fs.constants.F_OK, (err) => {
         if (err) {
-            // Si le fichier n'existe pas, copier le contenu de initial-data.json
             fs.copyFile(initialDataPath, dataPath, (err) => {
                 if (err) {
                     res.status(500).send('Une erreur est survenue lors de la copie du fichier.');
@@ -32,7 +21,9 @@ router.get('/tweets', (req, res) => {
                 }
             });
         } else {
-            res.send('Le fichier data.json existe déjà.');
+            const tweets = data.tweets;
+            const reversedata = tweets.slice().reverse(); 
+            res.json(reversedata);
         }
     });
 });
@@ -40,7 +31,7 @@ router.get('/tweets', (req, res) => {
 router.get('/handle/:handle', (req, res)=>{
 
     const { handle } = req.params;
-    
+
     const users = data.users;
     const tweets = data.tweets;
 
@@ -54,7 +45,7 @@ router.get('/handle/:handle', (req, res)=>{
     res.status(404).send(`l'utilisateur avec l'id : ${handle} n'existe pas`)
 })
 
-router.get('/handle/media', (req, res)=>{
+router.get('/handle/:media', (req, res)=>{
 
 })
 
