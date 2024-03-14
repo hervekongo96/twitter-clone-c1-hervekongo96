@@ -3,11 +3,9 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 
-const data = require('./assets/initial-data.json')
-
 app.use(express.json());
-app.use('/data', require('./Routes/pages'));
-app.use('/auth', require('./Routes/auth'));
+app.use('/', require('./Routes/pages'));
+app.use('/', require('./Routes/auth'));
 
 
 app.listen(PORT, ()=>{

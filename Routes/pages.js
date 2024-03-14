@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require("fs");
 const path = require('path');
-const data = require("../assets/initial-data.json");
-
+const data = require("../assets/data.json");
 
 
 router.get('/', (req, res)=>{
@@ -38,6 +37,30 @@ router.get('/tweets', (req, res) => {
     });
 });
 
+router.get('/handle/:handle', (req, res)=>{
+
+    const { handle } = req.params;
+    
+    const users = data.users;
+    const tweets = data.tweets;
+
+    const user = users.find(item => item.handle === handle);
+    const tweet = tweets.filter(tweetItem => tweetItem.author === user.id)
+
+    if(tweet) {
+        return res.send(tweet)
+    }
+
+    res.status(404).send(`l'utilisateur avec l'id : ${handle} n'existe pas`)
+})
+
+router.get('/handle/media', (req, res)=>{
+
+})
+
+router.get('/handle', (req, res)=>{
+
+})
 
 
 module.exports = router;
