@@ -46,11 +46,23 @@ router.get('/handle/:handle', (req, res)=>{
 })
 
 router.get('/handle/:media', (req, res)=>{
+    
+    const { media } = req.params;
+
 
 })
 
-router.get('/handle', (req, res)=>{
+router.get('/:name', (req, res)=>{
 
+    const { name } = req.params;
+
+    const allUser = data.users;
+    const onUser = allUser.filter(item => item.name === name); 
+
+    if(onUser.length > 0){
+        res.send(onUser)
+    }
+    res.status(404).send(`l'utilisateur avec les nom : ${name} n'existe pas`)
 })
 
 
