@@ -5,6 +5,10 @@ const path = require('path');
 const data = require("../assets/data.json");
 
 
+function findTweetByHandle (handle) {
+    const users = data.users;
+    return users.find(item => item.handle === handle);
+}
 
 router.get('/tweets', (req, res) => {
 
@@ -28,14 +32,13 @@ router.get('/tweets', (req, res) => {
     });
 });
 
-router.get('/handle/:handle', (req, res)=>{
+router.get('/:handle/tweets', (req, res)=>{
 
     const { handle } = req.params;
 
-    const users = data.users;
-    const tweets = data.tweets;
+    const tweets = data.tweets; 
 
-    const user = users.find(item => item.handle === handle);
+    const user = findTweetByHandle(handle);
     const tweet = tweets.filter(tweetItem => tweetItem.author === user.id)
 
     if(tweet) {
@@ -45,10 +48,21 @@ router.get('/handle/:handle', (req, res)=>{
     res.status(404).send(`l'utilisateur avec l'id : ${handle} n'existe pas`)
 })
 
-router.get('/handle/:media', (req, res)=>{
+router.get('/:handle/media', (req, res)=>{
     
-    const { media } = req.params;
+    const { handle } = req.params;
 
+    const tweets = data.tweets;
+
+    const user = findTweetByHandle(handle);
+    const media = tweets.filter(tweetItem => tweetItem.author === user.id && Array.isArray(tweetItem.media) && tweetItem.media.length > 0)
+
+    if(media) {
+        return res.send(media)
+    }
+
+    res.status(404).send(`l'utilisateur avec l'id : ${handle} n'existe pas`)
+ 
 
 })
 
