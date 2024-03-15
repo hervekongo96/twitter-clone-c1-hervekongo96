@@ -10,6 +10,19 @@ function findTweetByHandle (handle) {
     return users.find(item => item.handle === handle);
 }
 
+function allTweets (data) {
+    for (const tweet of data.tweets) {
+        const authorId = tweet.author;
+        const user = data.users.find(user => user.id === authorId);
+        if(user) {
+            tweet.handle = user.handle;
+            tweet.name = user.name;
+            tweet.profilePicture = user.profilePicture;
+            tweet.profileBackground = user.profileBackground;
+        }
+    }
+}
+
 router.get('/tweets', (req, res) => {
 
     const initialDataPath = path.join(__dirname, '../assets/initial-data.json');
@@ -25,9 +38,8 @@ router.get('/tweets', (req, res) => {
                 }
             });
         } else {
-            const tweets = data.tweets;
-            const reversedata = tweets.slice().reverse(); 
-            res.json(reversedata);
+            allTweets(data);
+            res.send(data);
         }
     });
 });
@@ -42,7 +54,7 @@ router.get('/:handle/tweets', (req, res)=>{
     const user = findTweetByHandle(handle);
     const tweet = tweets.filter(tweetItem => tweetItem.author === user.id)
 
-    if(tweet) {
+    if(tweet) { 
         return res.send(tweet)
     }
 
@@ -55,8 +67,8 @@ router.get('/:handle/media', (req, res)=>{
 
     const tweets = data.tweets;
 
-    const user = findTweetByHandle(handle);
-    const media = tweets.filter(tweetItem => tweetItem.author === user.id && Array.isArray(tweetItem.media) && tweetItem.media.length > 0)
+    const userMedia = findTweetByHandle(handle);
+    const media = tweets.filter(tweetItem => tweetItem.author === userMedia.id && Array.isArray(tweetItem.media) && tweetItem.media.length > 0)
 
     if(media) {
         return res.send(media)
@@ -74,11 +86,12 @@ router.get('/:name', (req, res)=>{
     const allUser = data.users;
     const onUser = allUser.filter(item => item.name === name); 
 
-    if(onUser.length > 0){
+    if(onUser && onUser.length > 0){
         res.send(onUser)
     }
     res.status(404).send(`l'utilisateur avec les nom : ${name} n'existe pas`)
 })
+
 
 
 module.exports = router;
