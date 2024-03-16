@@ -23,8 +23,34 @@ function allTweets (data) {
     }
 }
 
-router.get('/tweets', (req, res) => {
+// router.get('/tweets', (req, res) => {
+//     const initialDataPath = path.join(__dirname, '../assets/initial-data.json');
+//     const dataPath = path.join(__dirname, '../assets/data.json');
 
+//     fs.access(dataPath, fs.constants.F_OK, (err) => {
+//         if (err) {
+//             fs.copyFile(initialDataPath, dataPath, (err) => {
+//                 if (err) {
+//                     res.status(500).send('Une erreur est survenue lors de la copie du fichier.');
+//                 } else {
+//                     res.send('Le fichier data.json a été créé et le contenu a été copié avec succès.');
+//                 }
+//             });
+//         } else {
+//             fs.readFile(dataPath, 'utf8', (err, data) => {
+//                 if (err) {
+//                     res.status(500).send('Une erreur est survenue lors de la lecture du fichier.');
+//                     return;
+//                 }
+
+//                 //const jsonData = JSON.parse(data);
+//                 //res.send(jsonData);
+//                 res.send(data);
+//             });
+//         }
+//     });
+// });
+function checkDataFiles(req, res, next) {
     const initialDataPath = path.join(__dirname, '../assets/initial-data.json');
     const dataPath = path.join(__dirname, '../assets/data.json');
 
@@ -34,15 +60,53 @@ router.get('/tweets', (req, res) => {
                 if (err) {
                     res.status(500).send('Une erreur est survenue lors de la copie du fichier.');
                 } else {
-                    res.send('Le fichier data.json a été créé et le contenu a été copié avec succès.');
+                    console.log('Le fichier data.json a été créé et le contenu a été copié avec succès.');
+                    next();
                 }
             });
         } else {
-            allTweets(data);
-            res.send(data);
+            next();
         }
     });
+}
+
+router.use((req, res, next) => {
+    checkDataFiles(req, res, next);
 });
+router.get('/tweets', (req, res) => {
+    const dataPath = path.join(__dirname, '../assets/data.json');
+    fs.readFile(dataPath, 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send('Une erreur est survenue lors de la lecture du fichier.');
+            return;
+        }
+            const jsonData = JSON.parse(data);
+            allTweets(jsonData);
+            res.send(jsonData);
+        });
+        
+});
+
+// router.get('/tweets', (req, res) => {
+
+//     const initialDataPath = path.join(__dirname, '../assets/initial-data.json');
+//     const dataPath = path.join(__dirname, '../assets/data.json');
+
+//     fs.access(dataPath, fs.constants.F_OK, (err) => {
+//         if (err) {
+//             fs.copyFile(initialDataPath, dataPath, (err) => {
+//                 if (err) {
+//                     res.status(500).send('Une erreur est survenue lors de la copie du fichier.');
+//                 } else {
+//                     res.send('Le fichier data.json a été créé et le contenu a été copié avec succès.');
+//                 }
+//             });
+//         } else {
+//             allTweets(data);
+//             res.send(data);
+//         }
+//     });
+// });
 
 
 router.get('/:handle/tweets', (req, res)=>{

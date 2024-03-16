@@ -10,6 +10,7 @@ app.use('/', require('./Routes/pages'));
 app.use('/', require('./Routes/auth'));
 
 
+
 app.listen(PORT, ()=>{
     console.log(`le server est allumé au port ${PORT}`);
 })

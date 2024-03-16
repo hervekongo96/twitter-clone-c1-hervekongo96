@@ -3,7 +3,7 @@ const router = express.Router();
 const authController = require('../Controllers/auth');
 
 
-router.post('/sendTweet', authController.register);
+router.post('/tweets', authController.register);
 
 
  

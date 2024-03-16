@@ -3148,7 +3148,7 @@
       "media": [
         "https://picsum.photos/2585/3656.jpg"
       ],
-      "retweetCount": 5048, 
+      "retweetCount": 5048,
       "favoriteCount": 1055,
       "repliesCount": 383,
       "text": "Irure enim nulla ex cupidatat non est tempor. Velit dolor sunt sit incididunt enim voluptate id proident aliqua pariatur velit.",
@@ -3431,6 +3431,34 @@
       "repliesCount": 316,
       "text": "Incididunt irure ea adipisicing tempor occaecat cupidatat eiusmod. Proident voluptate magna quis deserunt veniam excepteur sit consequat tempor eu Lorem ipsum officia ea.",
       "createdAt": "Tue May 09 2023 09:43:47 GMT+0100 (West Africa Standard Time)"
+    },
+    {
+      "id": 251,
+      "author": 14,
+      "media": [],
+      "retweetCount": 1541,
+      "favoriteCount": 3114,
+      "repliesCount": 316,
+      "text": "Incididunt irure ea adipisicing tempor occaecat cupidatat eiusmod. Proident voluptate magna quis deserunt veniam excepteur sit consequat tempor eu Lorem ipsum officia ea.",
+      "createdAt": "Tue May 09 2023 09:43:47 GMT+0100 (West Africa Standard Time)",
+      "handle": "@odonnell",
+      "name": "Franks Knight",
+      "profilePicture": "https://i.pravatar.cc/300?img=23",
+      "profileBackground": "https://picsum.photos/4865/3749.jpg"
+    },
+    {
+      "id": 252,
+      "author": 14,
+      "media": [],
+      "retweetCount": 1541,
+      "favoriteCount": 3114,
+      "repliesCount": 316,
+      "text": "Masambukidi",
+      "createdAt": "Tue May 09 2023 09:43:47 GMT+0100 (West Africa Standard Time)",
+      "handle": "@odonnell",
+      "name": "Franks Knight",
+      "profilePicture": "https://i.pravatar.cc/300?img=23",
+      "profileBackground": "https://picsum.photos/4865/3749.jpg"
     }
   ]
 }
