@@ -87,28 +87,6 @@ router.get('/tweets', (req, res) => {
         
 });
 
-// router.get('/tweets', (req, res) => {
-
-//     const initialDataPath = path.join(__dirname, '../assets/initial-data.json');
-//     const dataPath = path.join(__dirname, '../assets/data.json');
-
-//     fs.access(dataPath, fs.constants.F_OK, (err) => {
-//         if (err) {
-//             fs.copyFile(initialDataPath, dataPath, (err) => {
-//                 if (err) {
-//                     res.status(500).send('Une erreur est survenue lors de la copie du fichier.');
-//                 } else {
-//                     res.send('Le fichier data.json a été créé et le contenu a été copié avec succès.');
-//                 }
-//             });
-//         } else {
-//             allTweets(data);
-//             res.send(data);
-//         }
-//     });
-// });
-
-
 router.get('/:handle/tweets', (req, res)=>{
 
     const { handle } = req.params;
